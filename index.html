@@ -1,0 +1,1175 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>UX UI University</title><meta name="description" content="Free, plain-English summaries of UX research, each linked to its source. See what works, what doesn't, and what the evidence can't prove."><link rel="icon" type="image/png" href="/avatar.png"><link rel="apple-touch-icon" href="/avatar.png"><link rel="canonical" href="https://uxuiuniversity.com/"><meta property="og:title" content="UX UI University"><meta property="og:description" content="Research-backed answers for every interface decision, shown on screen."><meta property="og:image" content="https://uxuiuniversity.com/avatar.png"><meta property="og:url" content="https://uxuiuniversity.com/"><meta name="twitter:card" content="summary"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a research library. Short masthead that says how to use it, a "start with a task" panel, then a filter rail beside a scannable list whose rows expand in place. */
+:root{
+  --paper:#f4f2f7; --sheet:#ffffff; --ink:#1a1620; --muted:#5d5866; --rule:#dfdae6; --wash:#ebe7f1;
+  --accent:#6a32b8; --accent-ink:#ffffff; --accent-wash:#efe7fa;
+  --measured:#1d7a55; --measured-wash:#dff2e8;
+  --standard:#2f5d8a; --standard-wash:#e2ecf5;
+  --guidance:#8a5a0b; --guidance-wash:#f6ebd5;
+  --warn:#9b3b16; --warn-wash:#fae5dc;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#151217; --sheet:#1d1920; --ink:#ece8ef; --muted:#a69fae; --rule:#332d38; --wash:#26212b;
+  --accent:#b99cff; --accent-ink:#1a1030; --accent-wash:#2e2443;
+  --measured:#6fd3a5; --measured-wash:#17382b;
+  --standard:#8fb6e0; --standard-wash:#1d2a38;
+  --guidance:#e5b75e; --guidance-wash:#3a2e14;
+  --warn:#f29a76; --warn-wash:#3d2219; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#151217; --sheet:#1d1920; --ink:#ece8ef; --muted:#a69fae; --rule:#332d38; --wash:#26212b;
+  --accent:#b99cff; --accent-ink:#1a1030; --accent-wash:#2e2443;
+  --measured:#6fd3a5; --measured-wash:#17382b;
+  --standard:#8fb6e0; --standard-wash:#1d2a38;
+  --guidance:#e5b75e; --guidance-wash:#3a2e14;
+  --warn:#f29a76; --warn-wash:#3d2219; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--body);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent);text-underline-offset:3px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono)}
+
+/* masthead */
+header.mast{border-bottom:1px solid var(--rule);background:var(--sheet)}
+.mast .wrap{padding-block:26px 18px;display:grid;gap:16px}
+.mast-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 32px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+h1{font:700 clamp(32px,5.5vw,56px)/.95 var(--display);letter-spacing:-.035em;margin:0;text-wrap:balance}
+h1 span{color:var(--accent)}
+.lede{max-width:62ch;color:var(--muted);margin:10px 0 0;font-size:16px}
+.stats{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0;padding:0;list-style:none}
+.stats li{display:grid;gap:2px}
+.stats b{font:700 26px/1 var(--display);font-variant-numeric:tabular-nums}
+.stats small{font:500 11px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.steps{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;padding:0;list-style:none;font-size:14px;color:var(--muted)}
+.steps li{display:flex;gap:8px;align-items:baseline}
+.steps b{font:500 12px/1 var(--mono);color:var(--accent);background:var(--accent-wash);border-radius:999px;width:20px;height:20px;display:inline-grid;place-items:center;flex:none}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap}
+nav.tabs a{padding:7px 14px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:500;border:1px solid var(--rule)}
+nav.tabs a[aria-current="page"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* start panel */
+.start{display:grid;grid-template-columns:minmax(0,1fr);gap:20px 36px;padding-block:22px 4px;max-width:820px}
+.start h2{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.kits-wrap{padding-block:28px 6px;display:grid;gap:14px}
+.kits-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px}
+.kits-head h2{font:700 26px/1.1 var(--display);letter-spacing:-.02em;margin:0}
+.kits-head p{margin:0;color:var(--muted);max-width:60ch}
+.kits{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.kit{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px 14px;align-items:start;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.kit:hover{border-color:var(--muted)}
+.kit.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.kit-art .phone{width:84px;max-width:84px;font-size:6px;padding:5px 4px;border-radius:11px;gap:3px}
+.kit-art .p-top{height:10px}
+.kit-art .p-h1{font-size:8px}
+.kit-art .p-tag{font-size:6px;bottom:4px;left:4px;right:4px}
+.kit-art .finger{width:20px;height:20px;margin:-10px 0 0 -10px}
+.kit-body{display:grid;gap:6px;min-width:0}
+.kit h3{font:700 17px/1.2 var(--display);margin:0}
+.kit-ask{margin:0;font-size:14px;color:var(--ink)}
+.kit-n{margin:0;font:500 12px var(--mono);color:var(--muted)}
+.kit-actions{grid-column:1/-1;display:flex;gap:8px}
+.kit-actions .btn{flex:1;justify-content:center}
+.kit-actions .btn:disabled{opacity:.6;cursor:default}
+.kit-actions .btn .lbl-on{display:none}
+.kit-actions .btn.in{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.kit-actions .btn.in .lbl-on{display:inline}
+.kit-actions .btn.in .lbl-off{display:none}
+.kit-actions .btn.in:hover .lbl-on,.kit-actions .btn.in:focus-visible .lbl-on{display:none}
+.kit-actions .btn.in:hover .lbl-off,.kit-actions .btn.in:focus-visible .lbl-off{display:inline}
+.kit-actions .btn.in:hover,.kit-actions .btn.in:focus-visible{background:var(--sheet);color:var(--warn);border-color:var(--warn)}
+@media (hover:none){.kit-actions .btn.in .lbl-on::after{content:" · tap to remove";font-weight:400;opacity:.8}}
+.task{display:inline-flex;gap:8px;align-items:baseline;padding:8px 12px;border-radius:8px;border:1px solid var(--rule);background:var(--sheet);cursor:pointer;font-weight:500;text-align:left}
+.task:hover{border-color:var(--accent)}
+.task[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.task .n{font:400 12px/1 var(--mono);opacity:.75;font-variant-numeric:tabular-nums}
+.briefs{display:grid;gap:0;border-top:1px solid var(--rule)}
+.briefs details{border-bottom:1px solid var(--rule)}
+.briefs summary{cursor:pointer;padding:9px 2px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.briefs summary::-webkit-details-marker{display:none}
+.briefs summary::after{content:"+";font:500 16px/1.2 var(--mono);color:var(--muted)}
+.briefs details[open] summary::after{content:"–"}
+.briefs p{margin:0 0 12px;max-width:68ch;color:var(--ink)}
+.briefs .xref{font:500 13px var(--mono);background:var(--wash);border-radius:4px;padding:1px 5px;text-decoration:none}
+
+/* layout */
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;padding-block:20px 96px}
+aside.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;display:grid;gap:22px;max-height:calc(100vh - 32px);overflow:auto}
+.rail h2{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.facet{display:grid;gap:2px}
+.facet button{display:flex;justify-content:space-between;gap:8px;text-align:left;background:none;border:0;padding:6px 8px;border-radius:6px;cursor:pointer}
+.facet button:hover{background:var(--wash)}
+.facet button[aria-pressed="true"]{background:var(--accent-wash);color:var(--accent);font-weight:600}
+.facet .n{font:400 12px/1.6 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.rail-select{display:none}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+.search{flex:1 1 260px;min-width:0;position:relative}
+.search input{width:100%;padding:11px 14px 11px 38px;border:1px solid var(--rule);border-radius:8px;background:var(--sheet)}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2}
+select{padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--sheet)}
+.check-opt{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.check-opt input{width:16px;height:16px;accent-color:var(--accent)}
+.btn{padding:10px 14px;border-radius:8px;border:1px solid var(--rule);background:var(--sheet);cursor:pointer;font-weight:500;white-space:nowrap;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.danger{color:var(--warn);border-color:var(--warn)}
+.btn.small{padding:6px 10px;font-size:13px}
+.summary{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:0 0 10px;min-height:28px}
+.count{font:400 13px/1.4 var(--mono);color:var(--muted)}
+.pill{display:inline-flex;gap:6px;align-items:center;font-size:13px;padding:3px 4px 3px 10px;border-radius:999px;background:var(--accent-wash);color:var(--accent);border:0;cursor:pointer}
+.pill span{font:500 14px/1 var(--mono);width:18px;height:18px;display:inline-grid;place-items:center;border-radius:999px}
+.pill:hover span{background:var(--sheet)}
+.linkish{background:none;border:0;color:var(--accent);cursor:pointer;font-size:13px;text-decoration:underline;text-underline-offset:3px;padding:2px}
+
+/* entry list */
+.index{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.entry{border-bottom:1px solid var(--rule)}
+.entry.flash{animation:flash 1.6s ease-out}
+@keyframes flash{from{background:var(--accent-wash)}to{background:transparent}}
+.row{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;padding:13px 4px}
+.row:hover{background:var(--wash)}
+.row h3{margin:0;font:600 16px/1.35 var(--body)}
+.row h3 button{all:unset;cursor:pointer}
+.row h3 button::after{content:"";position:absolute;inset:0}
+.row h3 button:focus-visible{outline:none}
+.row:has(h3 button:focus-visible){outline:2px solid var(--accent);outline-offset:-2px;border-radius:4px}
+.row .src{color:var(--muted);font-size:13px;margin-top:3px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.row .src .id{font:400 12px var(--mono)}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--muted);opacity:.6}
+.badge{font:500 11px/1 var(--mono);letter-spacing:.02em;padding:4px 6px;border-radius:4px;white-space:nowrap}
+.badge.measured{background:var(--measured-wash);color:var(--measured)}
+.badge.standard{background:var(--standard-wash);color:var(--standard)}
+.badge.guidance{background:var(--guidance-wash);color:var(--guidance)}
+.badge.unchecked{background:none;color:var(--muted);border:1px dashed var(--rule);padding:3px 5px}
+/* strength of evidence: a filled meter so it reads at a glance, separate from the kind-of-source badge */
+.str{display:inline-flex;align-items:center;gap:5px;font:600 11px/1 var(--mono);letter-spacing:.02em;white-space:nowrap;color:var(--ink)}
+.str i{display:inline-flex;gap:2px}
+.str i b{width:5px;height:10px;border-radius:1px;background:var(--rule)}
+.str.strong i b{background:var(--measured)}
+.str.moderate i b:nth-child(-n+2){background:var(--standard)}
+.str.guidance i b:first-child{background:var(--guidance)}
+.str-line{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:0;font-size:14px;color:var(--muted);padding:8px 12px;border-radius:8px;background:var(--wash);max-width:68ch}
+.str-line .str{font-size:12px}
+.add{position:relative;z-index:1;padding:6px 10px;border-radius:7px;border:1px solid var(--rule);background:var(--sheet);cursor:pointer;font-size:13px;font-weight:500;white-space:nowrap}
+.add:hover{border-color:var(--accent);color:var(--accent)}
+.add[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.detail{padding:2px 4px 22px;display:grid;gap:18px;max-width:900px}
+.finding{font-size:17px;line-height:1.5;margin:0;max-width:68ch}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px;margin:0}
+.field{min-width:0}
+.field dt{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.field dd{margin:0;max-width:62ch}
+.field.limit{border-left:3px solid var(--guidance);padding-left:14px}
+.method summary{cursor:pointer;font-size:13px;color:var(--muted);font-weight:500}
+.method dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 28px;margin:12px 0 0;padding:14px;background:var(--wash);border-radius:8px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.more{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:18px 4px}
+.empty{padding:40px 8px;color:var(--muted);max-width:56ch}
+.empty h3{color:var(--ink);font:600 18px/1.3 var(--display);margin:0 0 6px}
+
+/* audit tray */
+.tray{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:var(--ink);color:var(--paper);border-radius:12px;padding:10px 10px 10px 16px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 30px rgb(0 0 0 / .25);max-width:calc(100vw - 32px)}
+.tray .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.tray-clear{background:none;border:1px solid rgb(255 255 255 / .35);color:var(--paper);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+.tray-clear:hover{border-color:var(--paper)}
+.tray-clear:focus-visible{outline-color:var(--paper)}
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:20px;margin-bottom:20px;display:grid;gap:14px}
+.panel h2{font:700 22px/1.2 var(--display);margin:0}
+.audit-list{margin:0;padding-left:20px;display:grid;gap:6px}
+
+/* form */
+form.edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+form.edit label{display:grid;gap:5px;font-size:13px;font-weight:500;min-width:0}
+form.edit .wide{grid-column:1/-1}
+form.edit input,form.edit select,form.edit textarea{padding:9px 11px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);width:100%;min-width:0}
+form.edit textarea{min-height:76px;resize:vertical}
+.hint{font-weight:400;color:var(--muted);font-size:12px}
+.status-msg{font-size:13px;color:var(--muted)}
+.status-msg.err{color:var(--warn)}
+
+/* about */
+.guide{display:grid;gap:28px;padding-block:28px 64px;max-width:820px}
+.guide h2{font:700 28px/1.15 var(--display);letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance}
+.guide p{margin:0 0 8px;max-width:68ch}
+.ladder{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ladder li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:start}
+.guide ol{padding-left:20px;margin:0;display:grid;gap:6px;max-width:68ch}
+
+@media (max-width:860px){
+  .start{grid-template-columns:1fr}
+  .layout{grid-template-columns:1fr;gap:12px}
+  aside.rail{display:none}
+  .rail-select{display:block;flex:1 1 140px;min-width:0}
+  .pair,.method dl,form.edit{grid-template-columns:1fr}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .row .add{justify-self:start}
+  .ladder li{grid-template-columns:1fr;gap:4px}
+}
+@media (prefers-reduced-motion: no-preference){.detail{animation:open .18s ease-out}@keyframes open{from{opacity:.4;transform:translateY(-3px)}to{opacity:1;transform:none}}}
+@media (prefers-reduced-motion: reduce){.entry.flash{animation:none}}
+
+/* ---------- plain-language entries and phone-scene visuals ---------- */
+:root{--good:var(--measured);--good-wash:var(--measured-wash);--mid:var(--guidance);--mid-wash:var(--guidance-wash);--bad:var(--warn);--bad-wash:var(--warn-wash);--tl-lane:70px}
+.row .gist{margin:4px 0 0;color:var(--muted);font-size:14px;max-width:72ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.badge.visual{background:var(--wash);color:var(--ink)}
+.plain{font-size:18px;line-height:1.5;margin:0;max-width:64ch}
+.term{all:unset;cursor:help;border-bottom:1.5px dotted var(--accent);font-weight:500}
+.term:hover,.term[aria-expanded="true"]{background:var(--accent-wash)}
+.term:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-radius:2px}
+.def{margin:0;padding:10px 12px;border-radius:8px;background:var(--accent-wash);font-size:14px;max-width:68ch}
+.def b{font-family:var(--mono);font-weight:500}
+.fig{background:var(--wash);border-radius:10px;padding:18px;display:grid;gap:12px;min-width:0;overflow-x:auto}
+.fig-cap{font:500 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.fig-note{font-size:13px;color:var(--muted);margin:0;max-width:68ch}
+.row-lbl{font:600 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.row-lbl.g{color:var(--good)} .row-lbl.b{color:var(--bad)}
+.dd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dd>div{padding:12px 14px;border-radius:9px;min-width:0}
+.dd .do{background:var(--good-wash)} .dd .dont{background:var(--bad-wash)}
+.dd h4{font:600 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.dd .do h4{color:var(--good)} .dd .dont h4{color:var(--bad)}
+.dd p{margin:0}
+details.orig summary{cursor:pointer;font-size:13px;color:var(--muted);font-weight:500}
+details.orig .finding{margin-top:10px;font-size:15px}
+.scenes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:560px}
+.scenes.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:420px}
+.scene{margin:0;display:grid;gap:6px;justify-items:center;align-content:start;text-align:center;font-size:13px;min-width:0}
+.phone{width:100%;max-width:140px;aspect-ratio:9/16;border:2px solid var(--rule);border-radius:14px;background:var(--sheet);padding:7px 6px;display:flex;flex-direction:column;gap:4px;overflow:hidden;position:relative;font:500 8px/1.2 var(--body);color:var(--ink);text-align:left}
+.scenes.two .phone{max-width:170px;font-size:9px}
+.p-top{display:flex;align-items:center;gap:4px;height:14px;flex:none}
+.p-top .logo{width:28px;height:7px;border-radius:2px;background:var(--ink);opacity:.8}
+.p-back{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:9px;font-weight:700}
+.p-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;flex:none}
+.p-tile{aspect-ratio:1;border-radius:4px;background:var(--wash)}
+.p-tile.hl{outline:2px solid var(--accent);outline-offset:-2px}
+.p-img{height:38%;border-radius:5px;background:var(--wash);flex:none}
+.p-line{height:5px;border-radius:2px;background:var(--rule);flex:none}
+.p-line.s{width:60%} .p-line.h{height:8px;width:75%;background:var(--ink);opacity:.8}
+.p-btn{min-height:14px;border-radius:4px;background:var(--accent);color:var(--accent-ink);flex:none;display:grid;place-items:center;font-weight:600;padding:2px}
+.p-field{min-height:13px;border-radius:3px;border:1.5px solid var(--rule);flex:none;padding:1px 3px;color:var(--muted)}
+.p-field.bad{border-color:var(--bad);border-width:2px}
+.p-lab{flex:none;font-weight:600}
+.p-err{flex:none;color:var(--bad);font-weight:600}
+.p-blank{flex:1;display:grid;place-items:center;min-height:0}
+.spin{width:20px;height:20px;border-radius:50%;border:3px solid var(--rule);border-top-color:var(--accent)}
+@media (prefers-reduced-motion: no-preference){.spin{animation:uxspin 1s linear infinite}@keyframes uxspin{to{transform:rotate(360deg)}}}
+.p-tag{position:absolute;left:6px;right:6px;bottom:6px;border-radius:4px;padding:3px 4px;font:600 8px/1.2 var(--mono);text-align:center;z-index:3}
+.p-tag.g{background:var(--good-wash);color:var(--good)} .p-tag.b{background:var(--bad-wash);color:var(--bad)}
+.p-ban{flex:none;border-left:3px solid var(--accent);background:var(--accent-wash);border-radius:3px;padding:3px 4px}
+.p-ban.err{border-color:var(--bad);background:var(--bad-wash)}
+.p-h1{flex:none;font:700 11px/1.15 var(--display)}
+.scenes.two .p-h1{font-size:12px}
+.fold{position:absolute;left:0;right:0;top:70%;border-top:2px dashed var(--mid);z-index:2}
+.fold span{position:absolute;right:4px;top:-13px;font:600 7px var(--mono);color:var(--mid);background:var(--sheet);padding:0 2px}
+.below{opacity:.35}
+.chips{display:flex;flex-wrap:wrap;gap:3px;flex:none}
+.chips span{background:var(--accent-wash);color:var(--accent);border-radius:999px;padding:2px 5px;font-weight:600}
+.opt{display:flex;align-items:center;gap:4px;flex:none}
+.cb{width:9px;height:9px;border:1.5px solid var(--muted);border-radius:2px;display:inline-grid;place-items:center;font-size:7px;line-height:1;font-style:normal}
+.cb.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.rd{width:9px;height:9px;border:1.5px solid var(--muted);border-radius:50%}
+.rd.on{border:3px solid var(--accent)}
+.p-count{flex:none;font-weight:600;color:var(--muted)}
+.p-menu{display:grid;gap:2px;flex:none}
+.p-mi{padding:4px 5px;border-radius:3px;background:var(--wash)}
+.p-mi.cur{background:var(--accent-wash);color:var(--accent);font-weight:700;border-left:3px solid var(--accent)}
+.p-dim{position:absolute;inset:0;background:var(--ink);opacity:.35}
+.p-dialog{position:absolute;left:8%;right:8%;top:30%;background:var(--sheet);border-radius:8px;padding:7px;display:grid;gap:4px;z-index:1;box-shadow:0 4px 12px rgb(0 0 0/.25)}
+.p-dialog.sys{text-align:center}
+.p-dbtns{display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap}
+.p-dialog.sys .p-dbtns{justify-content:center}
+.p-dbtns span{padding:2px 5px;border-radius:3px;background:var(--wash);font-weight:600}
+.p-dbtns span.pri{background:var(--accent);color:var(--accent-ink)}
+.p-bigbtn{padding:7px 12px;border-radius:5px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:10px}
+.p-bigbtn.off{background:var(--accent-wash);color:var(--accent);outline:1.5px solid var(--accent)}
+.p-search{flex:none;border:1.5px solid var(--accent);border-radius:999px;padding:3px 6px;min-height:14px}
+.p-sugg{flex:none;padding:3px 4px;border-bottom:1px solid var(--rule)}
+.p-empty{display:grid;gap:4px;justify-items:center;text-align:center;padding:0 4px}
+.p-empty .p-btn{width:100%;padding:2px 6px}
+.p-chat{display:grid;gap:4px;align-content:end;flex:1}
+.bub{max-width:85%;padding:3px 5px;border-radius:6px;background:var(--wash);justify-self:start}
+.bub.me{background:var(--accent);color:var(--accent-ink);justify-self:end}
+.p-tog{display:flex;justify-content:space-between;align-items:center;gap:4px;flex:none;padding:3px 0;border-bottom:1px solid var(--rule)}
+.p-tog i{width:16px;height:9px;border-radius:999px;background:var(--rule);position:relative;flex:none}
+.p-tog i::after{content:"";position:absolute;top:1px;left:1px;width:7px;height:7px;border-radius:50%;background:var(--sheet)}
+.p-tog i.on{background:var(--accent)} .p-tog i.on::after{left:8px}
+.phone.lock{background:var(--ink)}
+.p-clock{color:var(--sheet);font:700 18px/1 var(--display);text-align:center;margin:8px 0}
+.p-note{flex:none;background:var(--sheet);opacity:.92;border-radius:6px;padding:4px 5px}
+.p-table{display:grid;gap:2px;flex:none}
+.p-table i{height:9px;background:var(--wash);border-radius:1px}
+.p-table i.th{background:var(--ink);opacity:.7}
+.p-ttext{display:grid;flex:none;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.p-ttext>*{padding:3px 4px;border-bottom:1px solid var(--rule);overflow-wrap:anywhere;min-width:0}
+.p-ttext .th{background:var(--wash);font-weight:700}
+.p-ttext .hl{background:var(--bad-wash);color:var(--bad);font-weight:600}
+.p-items{display:grid;gap:4px;flex:none}
+.p-item{display:grid;grid-template-columns:24% minmax(0,1fr);gap:4px;padding:3px;border-radius:4px;border:1px solid var(--rule);background:var(--sheet)}
+.p-item.hl{outline:2px solid var(--accent);outline-offset:-1px}
+.p-thumb{display:block;aspect-ratio:1;border-radius:3px;background:var(--wash);align-self:start}
+.p-it{display:grid;gap:1px;min-width:0}
+.p-it b{font-weight:600;overflow-wrap:anywhere}
+.p-sub{color:var(--muted);overflow-wrap:anywhere}
+.p-price{font-weight:700;font-variant-numeric:tabular-nums}
+.p-badge{justify-self:start;border-radius:3px;padding:1px 3px;font-weight:600}
+.p-badge.g{background:var(--good-wash);color:var(--good)} .p-badge.b{background:var(--bad-wash);color:var(--bad)}
+.finger{position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;background:var(--mid);opacity:.55;z-index:2}
+.mark{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 13px/1 var(--body);font-style:normal;z-index:2}
+.mark.tick{background:var(--good-wash);color:var(--good)} .mark.cross{background:var(--bad-wash);color:var(--bad)}
+.tl{display:grid;gap:10px;align-items:center;max-width:560px}
+.tl .hd{font:600 12px var(--mono);color:var(--muted);text-align:center}
+.tl .lane{font:600 12px/1.25 var(--mono)}
+.tl .lane.g{color:var(--good)} .tl .lane.b{color:var(--bad)}
+.tl .phone{max-width:110px}
+.sizes{display:flex;flex-wrap:wrap;gap:22px;align-items:end}
+.sz{display:grid;gap:6px;justify-items:start;font-size:13px}
+.sz .box{background:var(--accent-wash);border:1.5px solid var(--accent);border-radius:4px;display:grid;place-items:center}
+.sz .box i{display:block;border-radius:3px;background:var(--accent)}
+.sz b{font:600 14px var(--mono)}
+.gap-demo{display:flex;align-items:center}
+.gap-demo span{width:48px;height:48px;border-radius:4px;background:var(--accent-wash);border:1.5px solid var(--accent)}
+.callout{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font-size:14px;padding-top:8px;border-top:1px solid var(--rule)}
+.callout .n{font:700 24px/1 var(--display)}
+.gloss{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 16px;margin:0}
+.gloss dt{font:600 14px var(--mono)}
+.gloss dd{margin:0;max-width:62ch}
+@media (max-width:640px){
+  .dd{grid-template-columns:1fr}
+  :root{--tl-lane:52px}
+  .tl{gap:6px} .tl .lane,.tl .hd{font-size:10px}
+  .plain{font-size:17px}
+  .gloss{grid-template-columns:1fr;gap:2px 0}
+  .gloss dd{margin-bottom:8px}
+}
+
+
+/* hero: blueprint band with live phone scenes */
+:root{--hero-bg:#2b1636;--hero-ink:#ffffff;--hero-muted:#d6c6de;--hero-hi:#7ef0c4;--hero-line:rgb(255 255 255 / .07)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--hero-bg:#1d0e25;--hero-muted:#c2b0cc}}
+:root[data-theme="dark"]{--hero-bg:#1d0e25;--hero-muted:#c2b0cc}
+header.mast.hero{background-color:var(--hero-bg);background-image:linear-gradient(var(--hero-line) 1px,transparent 1px),linear-gradient(90deg,var(--hero-line) 1px,transparent 1px);background-size:28px 28px;color:var(--hero-ink);border-bottom:0;overflow:hidden}
+.hero .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px 40px;align-items:center;padding-block:44px 28px}
+.hero .kicker{color:var(--hero-muted)}
+.hero h1{font-size:clamp(44px,8vw,92px);line-height:.9;letter-spacing:-.045em;color:var(--hero-ink)}
+.hero h1 span{color:var(--hero-hi);display:inline-block}
+.hero-line{font:600 clamp(19px,2.4vw,24px)/1.3 var(--display);margin:18px 0 0;max-width:30ch;text-wrap:balance}
+.hero .lede{color:var(--hero-muted);margin-top:10px}
+.hero .stats{margin-top:22px;gap:12px 30px}
+.hero .stats b{font-size:34px;color:var(--hero-ink)}
+.hero .stats small{color:var(--hero-muted)}
+.hero .stats li{padding-left:12px;border-left:2px solid var(--hero-hi)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;margin-top:24px}
+.hero-btn{background:var(--hero-hi);color:#151a22;border-color:var(--hero-hi);font-weight:600;padding:12px 18px}
+.hero-btn:hover{border-color:var(--hero-ink)}
+.hero-link{color:var(--hero-ink);font-weight:500}
+.hero-art{position:relative;height:360px;min-width:0}
+.hero-art a{position:absolute;top:50%;left:50%;width:150px;text-decoration:none;color:inherit;transition:transform .25s ease}
+.hero-art a .phone{max-width:none;width:150px;box-shadow:0 18px 40px rgb(0 0 0 / .35);border-color:transparent;font-size:9px}
+.hero-art a:nth-child(1){transform:translate(-125%,-48%) rotate(-8deg)}
+.hero-art a:nth-child(2){transform:translate(-50%,-56%);z-index:2}
+.hero-art a:nth-child(3){transform:translate(25%,-44%) rotate(7deg)}
+.hero-art a:nth-child(1):hover,.hero-art a:nth-child(1):focus-visible{transform:translate(-125%,-54%) rotate(-5deg)}
+.hero-art a:nth-child(2):hover,.hero-art a:nth-child(2):focus-visible{transform:translate(-50%,-62%)}
+.hero-art a:nth-child(3):hover,.hero-art a:nth-child(3):focus-visible{transform:translate(25%,-50%) rotate(4deg)}
+.hero-art .badge-do{position:absolute;top:-12px;left:50%;transform:translateX(-50%);z-index:4;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--hero-hi);color:#151a22;padding:6px 9px;border-radius:999px;white-space:nowrap}
+.hero-art .art-cap{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion: no-preference){
+  .hero-art a .phone{animation:bob 6s ease-in-out infinite}
+  .hero-art a:nth-child(2) .phone{animation-delay:-2s}
+  .hero-art a:nth-child(3) .phone{animation-delay:-4s}
+  @keyframes bob{50%{transform:translateY(-6px)}}
+  .ticker-run{animation:tick 60s linear infinite}
+  .ticker:hover .ticker-run{animation-play-state:paused}
+  @keyframes tick{to{transform:translateX(-50%)}}
+}
+.ticker{display:flex;align-items:center;gap:14px;border-block:1px solid rgb(255 255 255 / .14);background:rgb(0 0 0 / .18);padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ticker-lbl{flex:none;font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--hero-hi);color:#151a22;padding:5px 8px;border-radius:4px}
+.ticker-track{overflow:hidden;min-width:0;flex:1;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.ticker-run{display:flex;gap:36px;width:max-content;font-size:14px;color:var(--hero-ink)}
+.ticker-run a{color:var(--hero-ink);text-decoration:none;white-space:nowrap}
+.ticker-run a:hover{text-decoration:underline}
+.ticker-run a b{font:500 12px var(--mono);color:var(--hero-hi);margin-right:8px}
+.hero-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:16px 18px}
+.hero .steps{color:var(--hero-muted)}
+.hero .steps b{background:rgb(255 255 255 / .12);color:var(--hero-hi)}
+.hero nav.tabs a{color:var(--hero-ink);border-color:rgb(255 255 255 / .3)}
+.hero nav.tabs a[aria-current="page"]{background:var(--hero-ink);color:var(--hero-bg);border-color:var(--hero-ink)}
+@media (max-width:860px){
+  .hero .hero-grid{grid-template-columns:1fr;padding-block:32px 8px}
+  .hero-art{height:290px}
+  .hero-art a,.hero-art a .phone{width:120px}
+  .hero-art a .phone{font-size:8px}
+}
+@media (max-width:420px){
+  .hero-art a:nth-child(1){transform:translate(-118%,-48%) rotate(-8deg)}
+  .hero-art a:nth-child(3){transform:translate(18%,-44%) rotate(7deg)}
+}
+/* ---------- laptop frame: same scenes, desktop browser ---------- */
+.lap{width:100%;display:grid;justify-items:center;min-width:0}
+.phone.laptop{max-width:none;aspect-ratio:16/10;border-radius:7px 7px 0 0;border:5px solid #2a2530;border-bottom-width:7px;padding:0 10px 8px;gap:5px;font-size:9px}
+.scenes .phone.laptop,.tl .phone.laptop,.lap .phone.laptop{max-width:none;width:100%}
+.scenes.two.lap-set .phone.laptop,.scenes.lap-set .phone.laptop{font-size:10px}
+.lap-base{display:block;width:108%;height:7px;background:linear-gradient(#cfc9d6,#a9a2b3);border-radius:0 0 9px 9px;position:relative}
+.lap-base::before{content:"";position:absolute;left:42%;right:42%;top:0;height:3px;background:#8d8698;border-radius:0 0 4px 4px}
+.lap-bar{display:flex;align-items:center;gap:6px;height:auto;padding:5px 0 4px;margin:0 -10px 1px;padding-inline:8px;background:var(--wash);border-bottom:1px solid var(--rule);flex:none}
+.lap-bar .dots{display:flex;gap:3px;flex:none}
+.lap-bar .dots i{width:5px;height:5px;border-radius:50%;background:var(--rule)}
+.lap-bar .url{flex:1;height:9px;border-radius:999px;background:var(--sheet);max-width:55%}
+.lap-head{display:flex;align-items:center;gap:8px;flex:none}
+.lap-head .logo{width:34px;height:7px;border-radius:2px;background:var(--ink);opacity:.8}
+.lap-head .nav{display:flex;gap:6px;margin-left:auto}
+.lap-head .nav i{width:22px;height:4px;border-radius:2px;background:var(--rule)}
+.scenes.lap-set{max-width:820px}
+.scenes.two.lap-set{max-width:820px}
+.tl.lap-set{max-width:900px}
+.tl.lap-set .phone.laptop{max-width:none}
+.laptop .p-items{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.laptop .p-item{grid-template-columns:1fr}
+.laptop .p-thumb{aspect-ratio:16/10}
+.laptop .p-grid{grid-template-columns:repeat(4,1fr)}
+.laptop .p-grid .p-tile{aspect-ratio:4/3}
+.lap-split{display:grid;grid-template-columns:26% minmax(0,1fr);gap:8px;flex:1;min-height:0;align-content:start}
+.lap-side{display:grid;gap:3px;align-content:start;padding-right:6px;border-right:1px solid var(--rule)}
+.lap-split.pdp{grid-template-columns:48% minmax(0,1fr);flex:none}
+.lap-split.pdp .p-img{height:auto;aspect-ratio:4/3}
+.lap-split.pdp>div:last-child{display:grid;gap:5px;align-content:start}
+.laptop .p-menu{grid-auto-flow:column;grid-auto-columns:max-content;gap:4px}
+.laptop.k-form>:is(.p-h1,.p-lab,.p-field,.p-err,.p-btn,.p-line),.laptop.k-search>:is(.p-search,.p-sugg),.laptop.k-settings>:is(.p-h1,.p-tog){width:56%;align-self:center}
+.laptop.k-page>.p-line{width:80%} .laptop.k-page>.p-line.s{width:50%}
+.laptop .p-btn{min-height:16px}
+.laptop.k-page>.p-btn{width:30%}
+.laptop .p-dialog{left:28%;right:28%;top:26%}
+.laptop .p-tag{left:22%;right:22%}
+.laptop .p-empty .p-btn{width:auto}
+.cursor{position:absolute;left:50%;top:50%;width:13px;height:19px;background:var(--ink);clip-path:polygon(0 0,0 85%,26% 64%,45% 100%,60% 93%,42% 58%,74% 58%);z-index:2;filter:drop-shadow(0 0 1px var(--sheet))}
+@media (max-width:640px){.scenes.two.lap-set,.scenes.lap-set{grid-template-columns:1fr;max-width:420px}.tl.lap-set{grid-template-columns:var(--tl-lane) minmax(0,1fr)!important}.tl.lap-set .hd{display:none}}
+</style>
+
+<header class="mast hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="kicker">branded.digital · Evidence for interface decisions</div>
+      <h1>UX UI <span>University</span></h1>
+      <p class="hero-line">Research-backed answers for every interface decision, shown on screen.</p>
+      <p class="lede">Free, plain-English summaries of UX research, each linked to its source. See what works, what doesn't, and what the evidence can't prove.</p>
+      <ul class="stats" aria-label="Library totals">
+        <li><b id="st-total">–</b><small>Entries</small></li>
+        <li><b id="st-verified">–</b><small>Measured studies</small></li>
+        <li><b id="st-week">–</b><small>New this week</small></li>
+        <li><b id="st-visual">–</b><small>Illustrated</small></li>
+      </ul>
+      <div class="hero-cta"><a class="btn hero-btn" href="#library-start">Browse the library</a><a class="hero-link" href="#about">How we check sources →</a></div>
+    </div>
+    <div class="hero-art" id="hero-art"></div>
+  </div>
+  <div class="ticker" aria-label="Latest entries"><span class="ticker-lbl">Latest</span><div class="ticker-track"><div class="ticker-run" id="ticker-run"><span>New research summaries are added most days</span></div></div></div>
+  <div class="wrap hero-foot">
+    <ol class="steps" aria-label="How to use the library">
+      <li><b>1</b>Pick an audit kit, topic or search</li>
+      <li><b>2</b>See the rule in action and what it doesn't prove</li>
+      <li><b>3</b>Add it to your audit checklist and download it</li>
+    </ol>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#library" id="tab-library" aria-current="page">Library</a>
+      <a href="#about" id="tab-about">How we check sources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="view-library" class="wrap"><span id="library-start"></span>
+    <section class="kits-wrap" aria-labelledby="kits-h">
+      <div class="kits-head"><h2 id="kits-h">Audit kits</h2><p>Pick what you're reviewing. Each kit gathers the research that matters for it, ready to add to your checklist.</p></div>
+      <div class="kits" id="tasks"></div>
+    </section>
+    <div class="start">
+      <div>
+        <h2>Questions we've answered</h2>
+        <div class="briefs">
+          <details><summary>How big should tap targets be?</summary>
+            <p><a class="xref" href="#entry-BD-046">BD-046</a> sets the WCAG 2.2 AA floor at 24×24 CSS px, with a spacing exception. <a class="xref" href="#entry-BD-045">BD-045</a> recommends about 1cm physical size, which is considerably larger on most phones. Our view: treat 24px as the compliance minimum, design primary actions toward the physical size, then check mis-taps on real devices.</p></details>
+          <details><summary>Should the homepage hero rotate?</summary>
+            <p><a class="xref" href="#entry-BD-054">BD-054</a> reports that later carousel slides often go unseen and advises against auto-rotation on mobile. <a class="xref" href="#entry-BD-050">BD-050</a> requires a pause control whenever content moves, and <a class="xref" href="#entry-BD-049">BD-049</a> lets people turn off interaction-triggered motion. Our view: one strong static message is the safer default; if you rotate, give people the controls. Neither source measures conversion.</p></details>
+          <details><summary>What makes form errors recoverable?</summary>
+            <p><a class="xref" href="#entry-BD-040">BD-040</a> covers message wording and placement, <a class="xref" href="#entry-BD-041">BD-041</a> adds a linked summary at the top of the page, and <a class="xref" href="#entry-BD-025">BD-025</a> warns against rejecting valid variations. Our view: audit wording, location and acceptance rules together. These are complementary guidance sources, not independent experiments.</p></details>
+          <details><summary>Should we hide detail to simplify a page?</summary>
+            <p><a class="xref" href="#entry-BD-030">BD-030</a> supports deferring rarely used controls; <a class="xref" href="#entry-BD-001">BD-001</a> and <a class="xref" href="#entry-BD-005">BD-005</a> emphasise readily available purchase information; <a class="xref" href="#entry-BD-059">BD-059</a> shows attention still concentrates near the top. Our view: keep decision-critical information visible early and test access to the rest.</p></details>
+          <details><summary>Is a fast site enough?</summary>
+            <p><a class="xref" href="#entry-BD-015">BD-015</a> defines performance measures; <a class="xref" href="#entry-BD-057">BD-057</a> and <a class="xref" href="#entry-BD-058">BD-058</a> cover how waiting feels; <a class="xref" href="#entry-BD-035">BD-035</a> sets historical response-time expectations. Our view: assess loading, feedback during waits and task completion separately. A fast page can still be confusing.</p></details>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <aside class="rail" aria-label="Filters">
+        <div><h2>Topic</h2><div class="facet" id="f-category"></div></div>
+        <div><h2>Strength of evidence</h2><div class="facet" id="f-strength"></div></div>
+        <div><h2>Kind of evidence</h2><div class="facet" id="f-class"></div></div>
+      </aside>
+      <div style="min-width:0">
+        <div id="editor-slot"></div>
+        <div id="audit-slot"></div>
+        <div class="toolbar">
+          <label class="search"><span hidden>Search</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="q" type="search" placeholder="Search findings, publishers, WCAG criteria…" autocomplete="off">
+          </label>
+          <select id="m-category" class="rail-select" aria-label="Topic"></select>
+          <select id="m-strength" class="rail-select" aria-label="Strength of evidence"></select>
+          <select id="m-class" class="rail-select" aria-label="Kind of evidence"></select>
+          <select id="sort" aria-label="Sort">
+            <option value="added">Newest first</option>
+            <option value="strength">Strongest evidence first</option>
+            <option value="verified">Fully checked first</option>
+            <option value="title">Title A–Z</option>
+            <option value="id">Catalogue number</option>
+          </select>
+          <label class="check-opt"><input type="checkbox" id="only-verified"> Fully checked only</label>
+          <button class="btn primary" id="btn-add" type="button" hidden>Add entry</button>
+        </div>
+        <div class="summary" id="summary" aria-live="polite"><span class="count">Loading the library…</span></div>
+        <ul class="index" id="index"></ul>
+        <div class="more" id="more" hidden><button class="btn" id="btn-more" type="button">Show more</button><span class="count" id="more-n"></span></div>
+        <div class="empty" id="empty" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-about" class="wrap" hidden>
+    <div class="guide">
+      <div>
+        <h2>How we check sources</h2>
+        <p>Every entry is written from the original source, in our own words. We record who published it, when, how they got their result and who they studied. Where a source doesn't say, the entry says "Not stated" rather than guessing.</p>
+      </div>
+      <div>
+        <h2>How strong is the evidence?</h2>
+        <p>Every entry carries a strength rating, so an audit can lead with its best-backed points. It answers one question: how confident can you be that this change affects what people actually do?</p>
+      </div>
+      <ul class="ladder">
+        <li><span class="str strong"><i aria-hidden="true"><b></b><b></b><b></b></i>Strong</span><span>A controlled experiment (an A/B test or randomised study) or a large real-world dataset, with the sample and period stated. Lead with these.</span></li>
+        <li><span class="str moderate"><i aria-hidden="true"><b></b><b></b><b></b></i>Moderate</span><span>Measured, but not controlled: usability testing, eyetracking, expert benchmarks, surveys, single-site case studies and natural experiments. Good evidence of a problem, weaker evidence of the fix's size.</span></li>
+        <li><span class="str guidance"><i aria-hidden="true"><b></b><b></b><b></b></i>Guidance only</span><span>Standards, laws, platform documentation, design-system patterns and expert advice. A WCAG rule or a legal requirement can still be mandatory; this rating only says the source doesn't measure what the change does to behaviour.</span></li>
+      </ul>
+      <div>
+        <h2>Kinds of evidence</h2>
+        <p>Each entry is also grouped by what kind of claim its source can support.</p>
+      </div>
+      <ul class="ladder">
+        <li><span class="badge measured">Measured research</span><span>Usability testing, eyetracking, benchmarks, audits and case studies. Supports claims about observed behaviour in a defined sample. Match the sample, period and device before applying it. Case studies are not randomised evidence.</span></li>
+        <li><span class="badge standard">Standards &amp; specs</span><span>WCAG, W3C tutorials, platform documentation, design-system patterns and regulatory reports. Reliable for what is required or specified. Not proof of business uplift.</span></li>
+        <li><span class="badge guidance">Expert guidance</span><span>Heuristics, syntheses and method advice. Useful for planning and structuring reviews. Open the original before quoting any number.</span></li>
+      </ul>
+      <div>
+        <h2>Editorial rules</h2>
+        <ol>
+          <li>Open the original source before adding or citing an entry.</li>
+          <li>Write every finding in our own words. Store a statistic only with its definition and the study it came from.</li>
+          <li>Several articles from one research programme count as one evidence base, not as independent confirmation.</li>
+          <li>Audit actions and measures are our suggestions, not tested guarantees. A case-study uplift is never a general promise.</li>
+          <li>Entries marked <span class="badge unchecked">Method not yet checked</span> have a reviewed summary, but we haven't yet recorded the source's method and sample. Check the original before quoting them.</li>
+        </ol>
+      </div>
+      <div>
+        <h2>Plain English and pictures</h2>
+        <p>Entries are being rewritten so the point lands fast: a one-line summary anyone can follow, a picture of the rule in action, and a Do / Don't pair. The full finding and its limits stay one tap away. Pictures are illustrations of the rule, not screenshots or measured data. They're drawn on a phone or a laptop, depending on where the source studied the behaviour. Entries marked <span class="badge visual">Illustrated</span> have been converted; the rest follow over the coming weeks.</p>
+      </div>
+      <div>
+        <h2>Jargon, explained</h2>
+        <p>Words with a dotted underline in an entry can be tapped for a short definition. Here they all are.</p>
+        <dl class="gloss" id="gloss"></dl>
+      </div>
+      <div>
+        <h2>What's still thin</h2>
+        <p>Areas that have a few entries but need more depth: localisation, settings pages, AI and chat interfaces, B2B and SaaS flows, account management, video players and email design. New entries are added most days.</p>
+      </div>
+      <div>
+        <h2>Use the data</h2>
+        <p>The whole library is free to reuse with a link back to the original sources.</p>
+        <div class="actions"><button class="btn" id="btn-export" type="button" hidden>Download all entries (JSON)</button><span class="status-msg" id="export-msg"></span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="tray" id="tray" hidden>
+  <span id="tray-label" aria-live="polite"><b id="tray-n" class="mono">0</b> in your audit</span>
+  <button class="btn small" id="tray-open" type="button">View checklist</button>
+  <button class="tray-clear" id="tray-clear" type="button" aria-label="Clear your audit checklist">Clear</button>
+</div>
+
+<script>
+(() => {
+  const ART_URL = "https://uxuiuniversity.com/";
+  const CLASS_OF = {
+    "Usability research":"measured","Eyetracking research":"measured","Peer-reviewed study":"measured","Quantitative survey":"measured","Research benchmark":"measured","Usability research & benchmark":"measured","Large-scale audit":"measured","Mixed-study aggregate & survey":"measured","Before-and-after case study":"measured","Observational case study":"measured","Vendor benchmark":"measured","Vendor benchmark preview":"measured","Research summary":"measured","Platform research summary":"measured",
+    "Standards reference":"standard","Official implementation guidance":"standard","Official documentation":"standard","Design-system pattern":"standard","Regulatory report":"standard"
+  };
+  const CLASS_LABEL = {measured:"Measured research", standard:"Standards & specs", guidance:"Expert guidance"};
+  const classOf = e => CLASS_OF[e.evidence] || "guidance";
+  // Strength of evidence: how confident you can be that the change affects behaviour. Stored per entry; falls back by kind of source.
+  const STRENGTHS = ["strong","moderate","guidance"];
+  const STRENGTH_LABEL = {strong:"Strong", moderate:"Moderate", guidance:"Guidance only"};
+  const strengthOf = e => STRENGTHS.includes(e.strength) ? e.strength : (classOf(e)==="measured" ? "moderate" : "guidance");
+  const strengthRank = e => STRENGTHS.indexOf(strengthOf(e));
+  const strBadge = e => { const s = strengthOf(e); return el("span",{class:"str "+s,title:(e.strengthWhy||""),"aria-label":"Evidence strength: "+STRENGTH_LABEL[s]}, el("i",{"aria-hidden":"true"}, el("b"), el("b"), el("b")), document.createTextNode(STRENGTH_LABEL[s])); };
+  const TASKS = [
+    {key:"category", label:"Category & collection pages", ask:"Can shoppers narrow hundreds of products down to a few?",
+      ids:["BD-019","BD-056","BD-130","BD-132","BD-134","BD-143","BD-151","BD-158","BD-160","BD-161","BD-162","BD-164","BD-165","BD-166","BD-167","BD-262"],
+      scene:{s:"filters",chips:["M ×","L ×","Under £50 ×"],count:"24 results",options:[{label:"M",on:true},{label:"L",on:true},{label:"XL"}]}},
+    {key:"checkout", label:"Checkout", ask:"Can people pay without surprises, errors or dead ends?", cats:["Checkout"], ids:["BD-079"],
+      scene:{s:"form",title:"Payment",fields:["Card number","Expiry"],button:"Pay now"}},
+    {key:"product", label:"Product pages", ask:"Does the page answer the questions that stop a purchase?", cats:["Product pages"], ids:["BD-225"],
+      scene:{s:"product",title:"Linen shirt",button:"Add to bag"}},
+    {key:"forms", label:"Forms & errors", ask:"Can people fill it in first time, and recover when they can't?", cats:["Forms & errors"], ids:["BD-124","BD-229"],
+      scene:{s:"form",fields:["Email"],values:["sam@mail"],errors:[0],errText:"Enter a valid email",button:"Continue"}},
+    {key:"search", label:"Site search", ask:"Does search find the right thing, even with typos?", cats:["Search"], ids:["BD-019","BD-158","BD-167","BD-249"],
+      scene:{s:"search",query:"blue sofa",items:["blue sofa bed","blue velvet sofa","sofa covers"]}},
+    {key:"mobile", label:"Mobile & touch", ask:"Can people tap, swipe and type comfortably on a phone?", cats:["Mobile & touch"], ids:["BD-046"],
+      scene:{s:"button",label:"Delete",finger:true}},
+    {key:"a11y", label:"Accessibility review", ask:"Can people using keyboards, screen readers or zoom get through?", cats:["Accessibility"],
+      scene:{s:"menu",items:["Skip to content","Home","Shop","Help"],current:2}},
+    {key:"trust", label:"Trust & dark patterns", ask:"Are choices honest, with nothing hidden or pushed?", cats:["Ethics & trust"],
+      scene:{s:"dialog",title:"Cookies",text:"Choose what we use",buttons:["Reject all","Accept all"],primary:-1,tag:{text:"Equal choices",tone:"g"}}}
+  ];
+  const FIELDS = ["title","url","publisher","category","scope","evidence","strength","strengthWhy","date","method","sample","plain","do","dont","finding","application","limitation","measurement","angle","access","status","reviewed","added"];
+  const $ = s => document.querySelector(s);
+  const el = (tag, attrs={}, ...kids) => { const n=document.createElement(tag); for (const [k,v] of Object.entries(attrs)) { if (k==="class") n.className=v; else if (k==="text") n.textContent=v; else if (k.startsWith("on")) n.addEventListener(k.slice(2),v); else if (v!==false && v!=null) n.setAttribute(k,v===true?"":v); } for (const c of kids) if (c!=null) n.append(c); return n; };
+
+  let entries = [];
+  let open = new Set();
+  let audit = loadAudit();
+  const filt = {category:"", cls:"", task:"", strength:""};
+  let db=null, downloads=null, canWrite=false, loaded=false, editing=null, pendingEntry=null;
+  const PAGE = 60;
+  let pageSize = PAGE, lastSig = "", pendingFocus = null;
+  document.getElementById("btn-more").addEventListener("click", () => { pageSize += PAGE; render(); });
+
+  function loadAudit(){ try { return new Set(JSON.parse(localStorage.getItem("uxu-audit")||"[]")); } catch { return new Set(); } }
+  function saveAudit(){ try { localStorage.setItem("uxu-audit", JSON.stringify([...audit])); } catch {} }
+  try { const s = localStorage.getItem("uxu-sort"); if (s) $("#sort").value = s; } catch {}
+
+  /* ---------- views and deep links ---------- */
+  function route(){
+    const h = location.hash.slice(1);
+    const about = h === "about" || h === "guide";
+    $("#view-about").hidden = !about; $("#view-library").hidden = about;
+    $("#tab-about").toggleAttribute("aria-current", about); $("#tab-library").toggleAttribute("aria-current", !about);
+    if (about) $("#tab-about").setAttribute("aria-current","page"); else $("#tab-library").setAttribute("aria-current","page");
+    if (h.startsWith("entry-")) { pendingEntry = h.slice(6); showPending(); }
+  }
+  function showPending(){
+    if (!pendingEntry || !loaded) return;
+    const id = pendingEntry; pendingEntry = null;
+    if (!entries.some(e=>e.id===id)) return;
+    filt.category = filt.cls = filt.task = filt.strength = ""; $("#q").value = ""; $("#only-verified").checked = false;
+    open.add(id); pendingFocus = id; render();
+    const node = document.getElementById("e-"+id);
+    if (node) { node.scrollIntoView({block:"start", behavior:"smooth"}); node.classList.remove("flash"); void node.offsetWidth; node.classList.add("flash"); node.querySelector("h3 button")?.focus({preventScroll:true}); }
+  }
+  addEventListener("hashchange", route);
+
+  /* ---------- filtering ---------- */
+  const taskOf = k => TASKS.find(t=>t.key===k);
+  const inTask = (e, t) => (t.cats||[]).includes(e.category) || (t.ids||[]).includes(e.id) || (Array.isArray(e.kits) && e.kits.includes(t.key));
+  function matches(e, skip){
+    const q = $("#q").value.trim().toLowerCase();
+    if (skip!=="category" && filt.category && e.category!==filt.category) return false;
+    if (skip!=="cls" && filt.cls && classOf(e)!==filt.cls) return false;
+    if (skip!=="strength" && filt.strength && strengthOf(e)!==filt.strength) return false;
+    if (skip!=="task" && filt.task && !inTask(e, taskOf(filt.task))) return false;
+    if ($("#only-verified").checked && e.status!=="Verified") return false;
+    if (q) { const hay = [e.id, ...FIELDS.filter(f=>f!=="angle").map(f=>e[f])].join(" ").toLowerCase(); if (!q.split(/\s+/).every(t=>hay.includes(t))) return false; }
+    return true;
+  }
+
+  function kitCard(t){
+    const members = entries.filter(e=>inTask(e,t));
+    const on = filt.task===t.key, added = members.length>0 && members.every(e=>audit.has(e.id));
+    const pics = members.filter(e=>e.visual?.layout).length;
+    return el("article",{class:"kit"+(on?" on":"")},
+      el("div",{class:"kit-art","aria-hidden":"true"}, phone(t.scene)),
+      el("div",{class:"kit-body"},
+        el("h3",{text:t.label}),
+        el("p",{class:"kit-ask",text:t.ask}),
+        el("p",{class:"kit-n",text: loaded ? `${members.length} checks${pics?` · ${pics} illustrated`:""}` : "Loading…"})),
+      el("div",{class:"kit-actions"},
+          el("button",{class:"btn small"+(on?" primary":""),type:"button","aria-pressed":String(on),onclick:()=>{ setTask(t.key); if (filt.task) document.getElementById("index").scrollIntoView({behavior:"smooth",block:"start"}); },text: on ? "Showing ✓" : "Show checks"}),
+          el("button",{class:"btn small"+(added?" in":""),type:"button",disabled:!loaded,"aria-pressed":String(added),"aria-label":(added?"Remove all from checklist: ":"Add all to checklist: ")+t.label,onclick:()=>{ members.forEach(e=>added?audit.delete(e.id):audit.add(e.id)); render(); }}, el("span",{class:"lbl-on",text:"✓ In checklist"}), el("span",{class:"lbl-off",text:added?"Remove all":"Add all to checklist"}))));
+  }
+  function setTask(k){ filt.task = filt.task===k ? "" : k; if (filt.task) filt.category = ""; render(); }
+  function setCategory(v){ filt.category = v; if (v) filt.task = ""; render(); }
+  function facet(container, select, key, valuesOf, labelOf, setter, order){
+    const counts = new Map();
+    for (const e of entries) if (matches(e, key)) { const v=valuesOf(e); counts.set(v,(counts.get(v)||0)+1); }
+    const all = order ? order.filter(v=>entries.some(e=>valuesOf(e)===v)) : [...new Set(entries.map(valuesOf))].sort((a,b)=>labelOf(a).localeCompare(labelOf(b)));
+    const total = entries.filter(e=>matches(e,key)).length;
+    container.replaceChildren(
+      el("button",{type:"button","aria-pressed":String(!filt[key]),onclick:()=>setter("")}, el("span",{text:"All"}), el("span",{class:"n",text:total})),
+      ...all.map(v => el("button",{type:"button","aria-pressed":String(filt[key]===v),onclick:()=>setter(filt[key]===v?"":v)}, el("span",{text:labelOf(v)}), el("span",{class:"n",text:counts.get(v)||0})))
+    );
+    select.replaceChildren(el("option",{value:"",text:select.getAttribute("aria-label")+": all"}), ...all.map(v=>{const o=el("option",{value:v,text:labelOf(v)+" ("+(counts.get(v)||0)+")"}); if(filt[key]===v)o.selected=true; return o;}));
+  }
+
+  /* ---------- render ---------- */
+  function render(){
+    const ids = new Set(entries.map(e=>e.id));
+    for (const id of [...audit]) if (loaded && !ids.has(id)) audit.delete(id);
+    facet($("#f-category"), $("#m-category"), "category", e=>e.category, v=>v, setCategory);
+    facet($("#f-strength"), $("#m-strength"), "strength", strengthOf, v=>STRENGTH_LABEL[v], v=>{filt.strength=v;render();}, STRENGTHS);
+    facet($("#f-class"), $("#m-class"), "cls", classOf, v=>CLASS_LABEL[v], v=>{filt.cls=v;render();});
+    $("#tasks").replaceChildren(...TASKS.map(kitCard));
+
+    const weekAgo = new Date(Date.now()-7*864e5).toISOString().slice(0,10);
+    if (loaded){
+      $("#st-total").textContent = entries.length;
+      $("#st-verified").textContent = entries.filter(e=>strengthOf(e)!=="guidance").length;
+      $("#st-week").textContent = entries.filter(e=>(e.added||"")>=weekAgo).length;
+      $("#st-visual").textContent = entries.filter(e=>e.visual?.layout).length;
+      if (typeof renderTicker === "function" && !render._ticked) { render._ticked = true; renderTicker(); }
+    }
+
+    const sort = $("#sort").value;
+    const byNew = (a,b) => (b.added||"").localeCompare(a.added||"") || b.id.localeCompare(a.id);
+    const shown = entries.filter(e=>matches(e)).sort((a,b)=>
+      sort==="added" ? byNew(a,b) :
+      sort==="strength" ? (strengthRank(a)-strengthRank(b)) || byNew(a,b) :
+      sort==="verified" ? ((a.status==="Verified"?0:1)-(b.status==="Verified"?0:1)) || byNew(a,b) :
+      sort==="title" ? a.title.localeCompare(b.title) : a.id.localeCompare(b.id));
+    renderSummary(shown.length);
+    const sig = [filt.category, filt.cls, filt.strength, filt.task, $("#q").value.trim(), $("#only-verified").checked, sort].join("|");
+    if (sig !== lastSig) { lastSig = sig; pageSize = PAGE; }
+    if (pendingFocus) { const i = shown.findIndex(e=>e.id===pendingFocus); if (i >= pageSize) pageSize = Math.ceil((i+1)/PAGE)*PAGE; pendingFocus = null; }
+    $("#index").replaceChildren(...shown.slice(0, pageSize).map(row));
+    const rest = shown.length - pageSize;
+    $("#more").hidden = rest <= 0;
+    if (rest > 0) $("#more-n").textContent = `${Math.min(pageSize, shown.length)} of ${shown.length} shown`;
+    $("#btn-more").textContent = `Show ${Math.min(PAGE, Math.max(rest,0))} more`;
+
+    const empty = $("#empty");
+    if (loaded && entries.length===0){ empty.hidden=false; empty.replaceChildren(el("h3",{text:"No entries yet"}), el("p",{text: canWrite ? "Add the first entry with the Add entry button." : "Entries appear here as the editor adds them."})); }
+    else if (loaded && shown.length===0){ empty.hidden=false; empty.replaceChildren(el("h3",{text:"No matching entries"}), el("p",{}, document.createTextNode("Try a different search term, or "), el("button",{class:"linkish",type:"button",onclick:clearAll,text:"clear all filters"}), document.createTextNode("."))); }
+    else empty.hidden=true;
+
+    renderTray();
+    renderAuditPanel();
+    saveAudit();
+  }
+  function clearAll(){ filt.category=filt.cls=filt.task=filt.strength=""; $("#q").value=""; $("#only-verified").checked=false; render(); }
+  function renderSummary(n){
+    const s = $("#summary");
+    if (!loaded) return;
+    const pills = [];
+    const pill = (label, clear) => el("button",{class:"pill",type:"button","aria-label":"Remove filter: "+label,onclick:clear}, document.createTextNode(label), el("span",{"aria-hidden":"true",text:"×"}));
+    if (filt.task) pills.push(pill(taskOf(filt.task).label, ()=>{filt.task="";render();}));
+    if (filt.category) pills.push(pill(filt.category, ()=>{filt.category="";render();}));
+    if (filt.strength) pills.push(pill("Strength: "+STRENGTH_LABEL[filt.strength], ()=>{filt.strength="";render();}));
+    if (filt.cls) pills.push(pill(CLASS_LABEL[filt.cls], ()=>{filt.cls="";render();}));
+    const q = $("#q").value.trim();
+    if (q) pills.push(pill(`“${q}”`, ()=>{$("#q").value="";render();}));
+    if ($("#only-verified").checked) pills.push(pill("Fully checked only", ()=>{$("#only-verified").checked=false;render();}));
+    if (pills.length>1) pills.push(el("button",{class:"linkish",type:"button",onclick:clearAll,text:"Clear all"}));
+    s.replaceChildren(el("span",{class:"count",text:`Showing ${n} of ${entries.length}`}), ...pills);
+  }
+
+
+  /* ---------- plain language: glossary ---------- */
+  const GLOSSARY = [
+    ["WCAG","Web Content Accessibility Guidelines. The international rulebook for accessible websites, written by the W3C. Many laws and policies point to it."],
+    ["Level AAA","The strictest WCAG level. A best-practice goal, rarely required by law."],
+    ["Level AA","The WCAG level most accessibility laws and policies point to. It includes everything in Level A."],
+    ["Level A","The most basic WCAG level. Failing a Level A rule usually blocks some people completely."],
+    ["AAA","Short for WCAG Level AAA, the strictest level. A best-practice goal, rarely required by law."],
+    ["AA","Short for WCAG Level AA, the level most accessibility laws and policies point to."],
+    ["ARIA","Extra code labels that tell screen readers what a custom control is and what state it's in, such as 'menu, expanded'."],
+    ["screen reader","Software that reads the screen aloud, used by many blind and low-vision people. Examples: VoiceOver, NVDA, JAWS."],
+    ["px","CSS pixels, the unit web designers size things in. It is scaled for each screen, so 48px is roughly the same physical size on most phones."],
+    ["Core Web Vitals","Google's three headline speed scores: LCP (loading), INP (responsiveness) and CLS (visual stability)."],
+    ["TTFB","Time to First Byte. The wait between clicking and the server starting to send the page back."],
+    ["LCP","Largest Contentful Paint. How long until the biggest thing on screen, usually the main image or heading, has appeared."],
+    ["INP","Interaction to Next Paint. How quickly the page visibly reacts after a tap, click or key press."],
+    ["CLS","Cumulative Layout Shift. How much the page jumps around while it loads."],
+    ["CDN","Content Delivery Network. Copies of a site stored on servers around the world, so visitors are served from somewhere close."],
+    ["redirect","When a link sends the browser to a different address before the real page loads. Each one adds waiting time."],
+    ["A/B test","An experiment that shows two versions to different visitors at the same time and compares the results."],
+    ["SUS","System Usability Scale. A standard 10-question survey that gives a usability score out of 100."],
+    ["SEQ","Single Ease Question. One question asked after a task: how easy or difficult was that?"],
+    ["GDPR","The EU's General Data Protection Regulation, the main law on handling personal data in Europe. The UK has its own version."],
+    ["CTA","Call to action. The main button or link you want people to use, like 'Add to bag'."],
+    ["SERP","Search engine results page. The list of results after a search."]
+  ];
+  const GLOSS = new Map(GLOSSARY.map(([k,v])=>[k.toLowerCase(),[k,v]]));
+  const GLOSS_RE = new RegExp("(?<![\\w/])(" + GLOSSARY.map(([k])=>k.replace(/[.*+?^${}()|[\]\\\/]/g,"\\$&")).join("|") + ")(s?)(?![\\w/])","gi");
+  const CAPS_ONLY = new Set(["wcag","aa","aaa","aria","ttfb","lcp","inp","cls","cdn","sus","seq","gdpr","cta","serp","level aa","level aaa","level a"]);
+  // Turn text into nodes, making the first mention of each glossary term tappable.
+  function glossed(text, seen, card){
+    const out = []; let last = 0; text = text || "";
+    for (const m of text.matchAll(GLOSS_RE)){
+      const key = m[1].toLowerCase();
+      if (seen.has(key) || !GLOSS.has(key)) continue;
+      if (CAPS_ONLY.has(key) && !/^(Level )?[A-Z]+$/.test(m[1])) continue;
+      seen.add(key);
+      out.push(document.createTextNode(text.slice(last, m.index)));
+      out.push(el("button",{class:"term",type:"button","aria-expanded":"false",onclick:ev=>showDef(ev.currentTarget, key, card),text:m[0]}));
+      last = m.index + m[0].length;
+    }
+    out.push(document.createTextNode(text.slice(last)));
+    return out;
+  }
+  function showDef(btn, key, card){
+    const box = card.querySelector(".def"); if (!box) return;
+    const wasOpen = btn.getAttribute("aria-expanded")==="true";
+    card.querySelectorAll(".term").forEach(t=>t.setAttribute("aria-expanded","false"));
+    if (wasOpen){ box.hidden = true; return; }
+    const [name, text] = GLOSS.get(key);
+    box.replaceChildren(el("b",{text:name+": "}), document.createTextNode(text));
+    box.hidden = false; btn.setAttribute("aria-expanded","true");
+  }
+
+  /* ---------- visuals: phone scenes built from entry data ---------- */
+  const tiles = (n, hl) => el("div",{class:"p-grid"}, ...Array.from({length:n},(_,i)=>el("i",{class:"p-tile"+(i===hl?" hl":"")})));
+  const line = (c="") => el("div",{class:"p-line "+c});
+  const SCREENS = {
+    list: o => o.items?.length ? [el("div",{class:"p-items"}, ...o.items.map(it => el("div",{class:"p-item"+(it.hl?" hl":"")}, el("i",{class:"p-thumb"}), el("div",{class:"p-it"}, el("b",{text:it.t||""}), it.s?el("span",{class:"p-sub",text:it.s}):null, it.p?el("span",{class:"p-price",text:it.p}):null, it.b?el("span",{class:"p-badge "+(it.bt==="b"?"b":"g"),text:it.b}):null))))] : o.top ? [line("h"), line(), tiles(2)] : [tiles(6, o.hl)],
+    product: o => o._lap ? [el("div",{class:"lap-split pdp"}, el("div",{class:"p-img"}), el("div",{}, o.title ? el("div",{class:"p-h1",text:o.title}) : line("h"), line(), line("s"), el("div",{class:"p-btn",text:o.button||""})))] : [el("div",{class:"p-img"}), o.title ? el("div",{class:"p-h1",text:o.title}) : line("h"), line(), line("s"), el("div",{class:"p-btn",text:o.button||""})],
+    loading: () => [el("div",{class:"p-blank"}, el("span",{class:"spin"}))],
+    blank: () => [el("div",{class:"p-blank"})],
+    page: o => [o.title ? el("div",{class:"p-h1",text:o.title}) : line("h"), ...Array.from({length:o.lines||4},(_,i)=>line(i%3===2?"s":"")), o.button ? el("div",{class:"p-btn",text:o.button}) : null],
+    form: o => { const f = Array.isArray(o.fields) ? o.fields : Array.from({length:o.fields||2},()=>"");
+      return [o.title ? el("div",{class:"p-h1",text:o.title}) : null, ...f.flatMap((lab,i)=>[lab ? el("div",{class:"p-lab",text:lab}) : line("s"), (o.errors||[]).includes(i) && o.errText ? el("div",{class:"p-err",text:o.errText}) : null, el("div",{class:"p-field"+((o.errors||[]).includes(i)?" bad":""),text:(o.values||[])[i]||""})]), el("div",{class:"p-btn",text:o.button||""})]; },
+    filters: o => { const opts = (o.options||[]).map(op=>el("div",{class:"opt"}, el("i",{class:(o.multi===false?"rd":"cb")+(op.on?" on":""),text:op.on&&o.multi!==false?"✓":""}), document.createTextNode(op.label)));
+      const head = [o.chips?.length ? el("div",{class:"chips"}, ...o.chips.map(c=>el("span",{text:c}))) : null, o.count ? el("div",{class:"p-count",text:o.count}) : null];
+      if (o._lap) return [...head, opts.length ? el("div",{class:"lap-split"}, el("div",{class:"lap-side"}, ...opts), tiles(8)) : tiles(8)];
+      return [...head, ...opts, tiles(2)]; },
+    menu: o => [el("div",{class:"p-menu"}, ...(o.items||[]).map((it,i)=>el("div",{class:"p-mi"+(i===o.current?" cur":""),text:it})))],
+    dialog: o => [line("h"), line(), line(), line("s"), el("div",{class:"p-dim"}), el("div",{class:"p-dialog"+(o.sys?" sys":"")}, el("b",{text:o.title||""}), o.text?el("span",{text:o.text}):null, el("div",{class:"p-dbtns"}, ...(o.buttons||["OK"]).map((b,i)=>el("span",{class:i===(o.primary??(o.buttons||[]).length-1)?"pri":"",text:b}))))],
+    button: o => [el("div",{class:"p-blank"}, el("div",{class:"p-bigbtn"+(o.pressed?" off":""),text:o.label||""}))],
+    search: o => [el("div",{class:"p-search",text:o.query||""}), ...(o.items||[]).map(t=>el("div",{class:"p-sugg",text:t})), o.count?el("div",{class:"p-count",text:o.count}):null, o.items?.length?null:tiles(4)],
+    empty: o => [el("div",{class:"p-blank"}, el("div",{class:"p-empty"}, el("b",{text:o.title||""}), o.text?el("span",{text:o.text}):null, o.button?el("div",{class:"p-btn",text:o.button}):null))],
+    chat: o => [el("div",{class:"p-chat"}, ...(o.msgs||[]).map(m=>el("div",{class:"bub"+(m.me?" me":""),text:m.text})))],
+    settings: o => [o.title?el("div",{class:"p-h1",text:o.title}):null, ...(o.toggles||[]).map(t=>el("div",{class:"p-tog"}, el("span",{text:t.label}), el("i",{class:t.on?"on":""})))],
+    notes: o => [el("div",{class:"p-clock",text:o.time||"9:41"}), ...(o.items||[]).map(t=>el("div",{class:"p-note",text:t}))],
+    // table: cols/rows as text arrays draw a real table; as numbers they draw a blank placeholder grid.
+    table: o => Array.isArray(o.cols) ? [o.title?el("div",{class:"p-h1",text:o.title}):null, el("div",{class:"p-ttext",style:`grid-template-columns:${o.cols.map((_,i)=>i?"minmax(0,1fr)":"minmax(0,1.6fr)").join(" ")}`},
+        ...(o.head===false?[]:o.cols.map(c=>el("b",{class:"th",text:c}))), ...(Array.isArray(o.rows)?o.rows:[]).flatMap((r,ri)=>o.cols.map((_,ci)=>el("span",{class:(Array.isArray(o.hlRows)&&o.hlRows.includes(ri))?"hl":"",text:r[ci]??""}))))]
+      : [o.title?el("div",{class:"p-h1",text:o.title}):null, el("div",{class:"p-table",style:`grid-template-columns:repeat(${+o.cols||3},1fr)`}, ...Array.from({length:(+o.cols||3)*(+o.rows||5)},(_,i)=>el("i",{class:i<(+o.cols||3)&&o.head!==false?"th":""})))]
+  };
+  // device: "laptop" draws the same scene in a desktop browser frame; anything else is a phone.
+  function phone(o, device){
+    const lap = (o.device || device) === "laptop";
+    if (lap) o = {...o, _lap:true};
+    const p = el("div",{class:"phone"+(SCREENS[o.s]===SCREENS.notes?" lock":"")+(lap?" laptop k-"+o.s:"")});
+    if (lap) p.append(el("div",{class:"lap-bar"}, el("span",{class:"dots"}, el("i"), el("i"), el("i")), o.back?el("span",{class:"p-back",text:"‹"}):null, el("span",{class:"url"})));
+    if (lap && o.s!=="loading" && o.s!=="blank") p.append(el("div",{class:"lap-head"}, el("span",{class:"logo"}), el("span",{class:"nav"}, el("i"), el("i"), el("i"))));
+    else if (!lap && o.s!=="loading" && o.s!=="notes" && o.s!=="blank") p.append(el("div",{class:"p-top"}, o.back?el("span",{class:"p-back",text:"‹"}):null, el("span",{class:"logo"})));
+    for (const b of o.banners||[]) p.append(el("div",{class:"p-ban"+(b.err?" err":""),text:b.text||""}));
+    if (o.h1) p.append(el("div",{class:"p-h1",text:o.h1}));
+    const kids = (SCREENS[o.s]||SCREENS.page)(o);
+    const belowFrom = o.fold && Number.isInteger(o.below) ? o.below : null;
+    kids.filter(Boolean).forEach((k,i)=>{ if (belowFrom!=null && i>=belowFrom) k.classList.add("below"); p.append(k); });
+    if (o.fold) p.append(el("div",{class:"fold"}, el("span",{text:"FOLD"})));
+    if (o.finger) p.append(el("i",{class:lap?"cursor":"finger"}));
+    if (o.mark) p.append(el("i",{class:"mark "+(o.mark==="tick"?"tick":"cross"),text:o.mark==="tick"?"✓":"✕"}));
+    if (o.tag) p.append(el("span",{class:"p-tag "+(o.tag.tone==="g"?"g":"b"),text:o.tag.text}));
+    return lap ? el("div",{class:"lap"}, p, el("i",{class:"lap-base"})) : p;
+  }
+  const scene = (o, capNode, device) => el("figure",{class:"scene"}, phone(o, device), capNode ? el("figcaption",{}, ...[].concat(capNode)) : null);
+  const lbl = (tone, text) => el("b",{style:`color:var(--${tone==="g"?"good":"bad"})`,text});
+  function visualFig(e){
+    const v = e.visual; if (!v || !v.layout) return null;
+    const fig = el("div",{class:"fig"});
+    const dev = v.device === "laptop" ? "laptop" : "phone", ls = dev==="laptop" ? " lap-set" : "";
+    if (v.cap) fig.append(el("p",{class:"fig-cap",text:v.cap}));
+    try {
+      if (v.layout==="pair"){
+        fig.append(el("div",{class:"scenes two"+ls},
+          scene(v.do, [lbl("g","Do: "), document.createTextNode(v.do.cap||"")], dev),
+          scene(v.dont, [lbl("b","Don't: "), document.createTextNode(v.dont.cap||"")], dev)));
+      } else if (v.layout==="strip"){
+        if (v.do?.length){ fig.append(el("div",{class:"row-lbl g",text:"Do"}), el("div",{class:"scenes"+ls}, ...v.do.map(f=>scene(f, f.cap, dev)))); }
+        if (v.dont?.length){ fig.append(el("div",{class:"row-lbl b",text:"Don't"}), el("div",{class:"scenes"+ls}, ...v.dont.map(f=>scene(f, f.cap, dev)))); }
+      } else if (v.layout==="timeline"){
+        const g = el("div",{class:"tl"+ls,style:`grid-template-columns:var(--tl-lane) repeat(${v.times.length},minmax(0,1fr))`}, el("span"));
+        v.times.forEach(t=>g.append(el("span",{class:"hd",text:t})));
+        for (const ln of v.lanes){ g.append(el("span",{class:"lane "+(ln.tone==="g"?"g":"b"),text:ln.label})); ln.frames.forEach(f=>g.append(scene(f, null, dev))); }
+        fig.append(g);
+      } else if (v.layout==="sizes"){
+        fig.append(el("div",{class:"sizes"}, ...(v.items||[]).map(it=>el("div",{class:"sz"},
+          el("div",{class:"box",style:`width:${+it.px}px;height:${+it.px}px`}, el("i",{style:`width:${Math.min(16,Math.round(it.px/2))}px;height:${Math.min(16,Math.round(it.px/2))}px`})),
+          el("b",{text:it.px+"px"}), el("span",{text:it.label||""}))),
+          v.gap ? el("div",{class:"sz"}, el("div",{class:"gap-demo",style:`gap:${+v.gap.px}px`}, el("span"), el("span")), el("b",{text:v.gap.px+"px gap"}), el("span",{text:v.gap.label||""})) : null));
+      } else return null;
+    } catch(err){ console.warn("Visual skipped for", e.id, err); return null; }
+    if (v.note) fig.append(el("p",{class:"fig-note",text:v.note}));
+    if (e.stat?.n) fig.append(el("div",{class:"callout"}, el("span",{class:"n",text:e.stat.n}), el("span",{text:e.stat.text||""})));
+    return fig;
+  }
+  const hasPlain = e => !!(e.plain && e.plain.trim());
+
+  function row(e){
+    const isOpen = open.has(e.id), cls = classOf(e), inAudit = audit.has(e.id);
+    const li = el("li",{class:"entry",id:"e-"+e.id});
+    const r = el("div",{class:"row"},
+      el("div",{style:"min-width:0"},
+        el("h3",{}, el("button",{type:"button","aria-expanded":String(isOpen),"aria-controls":"d-"+e.id,onclick:()=>{ isOpen?open.delete(e.id):open.add(e.id); render(); document.querySelector(`#e-${CSS.escape(e.id)} h3 button`)?.focus({preventScroll:true}); },text:e.title})),
+        hasPlain(e) && !isOpen ? el("p",{class:"gist",text:e.plain}) : null,
+        el("div",{class:"src"},
+          el("span",{text:e.publisher}), el("span",{class:"dot","aria-hidden":"true"}),
+          el("span",{text:e.date}), el("span",{class:"dot","aria-hidden":"true"}),
+          el("span",{text:e.category}),
+          strBadge(e),
+          el("span",{class:"badge "+cls,text:CLASS_LABEL[cls]}),
+          e.visual?.layout ? el("span",{class:"badge visual",text:"Illustrated"}) : null,
+          e.status!=="Verified" ? el("span",{class:"badge unchecked",title:"We haven't yet recorded this source's method and sample. Check the original before quoting it.",text:"Method not yet checked"}) : null,
+          el("span",{class:"id",text:e.id}))),
+      el("button",{class:"add",type:"button","aria-pressed":String(inAudit),"aria-label":(inAudit?"Remove from audit: ":"Add to audit: ")+e.title,onclick:()=>{ inAudit?audit.delete(e.id):audit.add(e.id); render(); }, text: inAudit ? "✓ In audit" : "+ Add to audit"}));
+    li.append(r);
+    if (isOpen) li.append(detail(e));
+    return li;
+  }
+  const field = (label, value, cls="") => el("div",{class:"field "+cls}, el("dt",{text:label}), el("dd",{text:value||"Not stated"}));
+  function detail(e){
+    const d = el("div",{class:"detail",id:"d-"+e.id});
+    d.append(el("p",{class:"str-line"}, el("span",{text:"Evidence strength"}), strBadge(e), e.strengthWhy ? el("span",{text:e.strengthWhy}) : null));
+    if (hasPlain(e)){
+      const seen = new Set();
+      d.append(el("p",{class:"plain"}, ...glossed(e.plain, seen, d)));
+      const fig = visualFig(e); if (fig) d.append(fig);
+      if (e.do || e.dont) d.append(el("div",{class:"dd"},
+        e.do ? el("div",{class:"do"}, el("h4",{text:"Do"}), el("p",{}, ...glossed(e.do, seen, d))) : null,
+        e.dont ? el("div",{class:"dont"}, el("h4",{text:"Don't"}), el("p",{}, ...glossed(e.dont, seen, d))) : null));
+      d.append(el("p",{class:"def",hidden:true,"aria-live":"polite"}));
+      d.append(el("details",{class:"orig"}, el("summary",{text:"Read the full finding"}), el("p",{class:"finding",text:e.finding})));
+    } else d.append(el("p",{class:"finding",text:e.finding}));
+    d.append(el("dl",{class:"pair"},
+      field("How to use it in an audit", e.application),
+      field("What it doesn't prove", e.limitation, "limit")));
+    d.append(el("dl",{class:"pair"},
+      field("Measure with", e.measurement),
+      canWrite ? field("Content angle (only editors see this)", e.angle) : null));
+    d.append(el("details",{class:"method"}, el("summary",{text:"How the source got this result"}),
+      el("dl",{},
+        field("Method", e.method), field("Sample", e.sample),
+        field("Kind of source", e.evidence), field("Access", e.access),
+        field("Published", e.date), field("Last reviewed by us", e.reviewed))));
+    d.append(el("div",{class:"actions"},
+      el("a",{class:"btn small",href:e.url,target:"_blank",rel:"noopener noreferrer",text:"Open source ↗"}),
+      el("button",{class:"btn small",type:"button",onclick:ev=>copy(cite(e), ev.currentTarget), text:"Copy citation"}),
+      el("button",{class:"btn small",type:"button",onclick:ev=>copy(`${ART_URL}#entry-${e.id}`, ev.currentTarget), text:"Copy link to entry"}),
+      canWrite ? el("button",{class:"btn small",type:"button",onclick:()=>openEditor(e), text:"Edit"}) : null));
+    return d;
+  }
+  const cite = e => `${e.publisher}. "${e.title}" (${e.date}). ${e.url} — summarised in UX UI University, ${e.id}, reviewed ${e.reviewed}.`;
+  async function copy(text, btn){
+    const old = btn.textContent;
+    try { await navigator.clipboard.writeText(text); btn.textContent="Copied"; }
+    catch { btn.textContent="Copy blocked here"; }
+    setTimeout(()=>btn.textContent=old, 1500);
+  }
+
+  /* ---------- audit checklist ---------- */
+  let auditOpen = false;
+  // Clearing is undoable for a few seconds instead of asking "are you sure?".
+  let undoSet = null, undoTimer = 0;
+  function clearAudit(){
+    if (!audit.size) return;
+    undoSet = new Set(audit); audit.clear(); auditOpen = false;
+    clearTimeout(undoTimer); undoTimer = setTimeout(() => { undoSet = null; render(); }, 6000);
+    render(); $("#tray-open").focus();
+  }
+  function undoClear(){
+    if (!undoSet) return;
+    clearTimeout(undoTimer); audit = undoSet; undoSet = null; render(); $("#tray-open").focus();
+  }
+  function renderTray(){
+    const undoing = !!undoSet && audit.size===0;
+    if (audit.size) { undoSet = null; clearTimeout(undoTimer); }
+    $("#tray").hidden = audit.size===0 && !undoing;
+    $("#tray-clear").hidden = undoing;
+    if (undoing){ $("#tray-label").textContent = `Checklist cleared (${undoSet.size})`; $("#tray-open").textContent = "Undo"; }
+    else { $("#tray-label").replaceChildren(el("b",{id:"tray-n",class:"mono",text:audit.size}), document.createTextNode(" in your audit")); $("#tray-open").textContent = "View checklist"; }
+  }
+  $("#tray-clear").addEventListener("click", clearAudit);
+  $("#tray-open").addEventListener("click", () => { if (undoSet && audit.size===0) return undoClear(); auditOpen = true; if (location.hash==="#about") location.hash="#library"; render(); $("#audit-slot").scrollIntoView({behavior:"smooth"}); });
+  // The checklist leads with the best-backed points: strongest evidence first, then catalogue order.
+  const auditList = () => entries.filter(e=>audit.has(e.id)).sort((a,b)=>(strengthRank(a)-strengthRank(b)) || a.id.localeCompare(b.id));
+  function auditMarkdown(){
+    const list = auditList();
+    return `# UX audit checklist\n\nGenerated from UX UI University, ${new Date().toISOString().slice(0,10)}. Ordered by strength of evidence, strongest first.\n\n` + list.map(e =>
+      `## [ ] ${e.id} · ${e.title}\n\n- **Evidence strength:** ${STRENGTH_LABEL[strengthOf(e)]}${e.strengthWhy ? ` (${e.strengthWhy})` : ""}\n${e.plain ? `- **In short:** ${e.plain}\n` : ""}${e.do ? `- **Do:** ${e.do}\n` : ""}${e.dont ? `- **Don't:** ${e.dont}\n` : ""}- **Check:** ${e.application}\n- **Evidence:** ${e.finding}\n- **Limit:** ${e.limitation}\n- **Measure:** ${e.measurement}\n- **Source:** ${e.publisher}, ${e.date}. ${e.url}\n`).join("\n");
+  }
+  function renderAuditPanel(){
+    const slot = $("#audit-slot");
+    if (!auditOpen || audit.size===0){ slot.replaceChildren(); return; }
+    const list = auditList();
+    const msg = el("span",{class:"status-msg"});
+    slot.replaceChildren(el("section",{class:"panel","aria-label":"Audit checklist"},
+      el("div",{class:"actions",style:"justify-content:space-between"}, el("h2",{text:`Your audit checklist · ${list.length}`}),
+        el("button",{class:"btn small",type:"button",onclick:()=>{auditOpen=false;render();},text:"Close"})),
+      el("p",{class:"status-msg",text:"Strongest evidence first. Your selection is kept in this browser only. Download it as a Markdown checklist to use in a client audit."}),
+      el("ol",{class:"audit-list"}, ...list.map(e=>el("li",{}, el("b",{class:"mono",text:e.id+" "}), strBadge(e), document.createTextNode(" "+e.application)))),
+      el("div",{class:"actions"},
+        downloads ? el("button",{class:"btn primary small",type:"button",onclick:()=>save("ux-audit-checklist.md", auditMarkdown(), msg),text:"Download checklist (.md)"}) : null,
+        el("button",{class:"btn small",type:"button",onclick:ev=>copy(auditMarkdown(), ev.currentTarget),text:"Copy as Markdown"}),
+        el("button",{class:"btn small",type:"button",onclick:clearAudit,text:"Clear checklist"}), msg)));
+  }
+  async function save(filename, data, msgEl){
+    if (!downloads) return;
+    try { await downloads.save({filename, data}); if (msgEl) { msgEl.className="status-msg"; msgEl.textContent="Saved "+filename; } }
+    catch (err) { if (msgEl && err?.code!=="declined") { msgEl.className="status-msg err"; msgEl.textContent="Downloads aren't available here. Use Copy instead."; } }
+  }
+  $("#btn-export").addEventListener("click", () => save("ux-ui-university-entries.json", JSON.stringify(entries.map(({angle,...e})=>e), null, 2), $("#export-msg")));
+
+  /* ---------- editor ---------- */
+  const CATS = ["Accessibility","Checkout","Content & readability","Ethics & trust","Forms & errors","Marketing & brand","Measurement & testing","Mobile & touch","Navigation & discovery","Performance & feedback","Product pages","Research methods","Search","UI & interaction","Visual design"];
+  const EVID = [...Object.keys(CLASS_OF), "Usability guidance","Design heuristic","Design guidance","Research synthesis","Historical research synthesis","Method guidance","Experimentation method guidance","Research-informed framework"];
+  function nextId(){ const n = Math.max(0, ...entries.map(e=>parseInt(e.id.slice(3))||0)) + 1; return "BD-" + String(n).padStart(3,"0"); }
+  function openEditor(e){ editing = e ? {...e} : {id:nextId(), scope:"Core UX/UI", status:"Verified", access:"Free full page", added:new Date().toISOString().slice(0,10), reviewed:new Date().toISOString().slice(0,10)}; renderEditor(); $("#editor-slot").scrollIntoView({behavior:"smooth"}); }
+  function renderEditor(){
+    const slot = $("#editor-slot");
+    if (!editing){ slot.replaceChildren(); return; }
+    const e = editing, isNew = !entries.some(x=>x.id===e.id);
+    const inp = (name,label,opts={}) => {
+      const id = "ed-"+name; let c;
+      if (opts.options){ c = el("select",{id,name}); for (const o of opts.options){ const op=el("option",{value:o,text:o}); if ((e[name]||opts.options[0])===o) op.selected=true; c.append(op);} }
+      else if (opts.area){ c = el("textarea",{id,name}); c.value = e[name]||""; }
+      else { c = el("input",{id,name,type:opts.type||"text"}); c.value = e[name]||""; }
+      if (opts.required) c.required = true;
+      return el("label",{class:opts.wide?"wide":""}, el("span",{}, document.createTextNode(label+" "), opts.hint?el("span",{class:"hint",text:opts.hint}):null), c);
+    };
+    const msg = el("span",{class:"status-msg"});
+    const jsonInp = (name,label,hint) => { const c = el("textarea",{id:"ed-"+name,name,class:"mono",spellcheck:"false"}); c.value = e[name] ? JSON.stringify(e[name], null, 1) : ""; return el("label",{class:"wide"}, el("span",{}, document.createTextNode(label+" "), el("span",{class:"hint",text:hint})), c); };
+    const confirmBox = el("span",{class:"actions"});
+    const form = el("form",{class:"edit"},
+      inp("title","Title",{required:true,hint:"Your own descriptive title"}), inp("url","Source URL",{type:"url",required:true}),
+      inp("publisher","Publisher",{required:true}), inp("date","Publication date",{hint:"As shown on the page, or 'Date not shown'"}),
+      inp("category","Topic",{options:CATS}), inp("evidence","Evidence type",{options:EVID}),
+      inp("strength","Strength of evidence",{options:["guidance","moderate","strong"],hint:"strong = controlled experiment or large dataset; moderate = measured but not controlled; guidance = not measured"}),
+      inp("strengthWhy","Why this strength",{hint:"One short sentence"}),
+      inp("method","Method",{hint:"'Not stated' if the source doesn't say"}), inp("sample","Sample",{hint:"Size, geography, period"}),
+      inp("finding","Finding",{area:true,wide:true,required:true,hint:"In your own words. Include any statistic's definition."}),
+      inp("limitation","What it doesn't prove",{area:true,wide:true,required:true}),
+      inp("application","How to use it in an audit",{area:true,wide:true}),
+      inp("plain","Plain-English summary",{area:true,wide:true,hint:"One or two short sentences a non-expert understands"}),
+      inp("do","Do",{area:true}), inp("dont","Don't",{area:true}),
+      jsonInp("visual","Picture (JSON)","Layout: pair, strip, timeline or sizes. Add \"device\":\"laptop\" for a desktop browser frame (default is a phone). Leave empty for none."),
+      jsonInp("stat","Stat callout (JSON)","For example {\"n\":\"1 in 5\",\"text\":\"…\"}. Leave empty for none."),
+      inp("measurement","Measure with",{hint:"Separate with semicolons"}), inp("angle","Content angle",{hint:"Only editors see this"}),
+      inp("access","Access",{options:["Free full page","Partial / gated","Public preview only"]}), inp("scope","Scope",{options:["Core UX/UI","Adjacent"]}),
+      inp("status","Status",{options:["Verified","Needs method check"]}), inp("reviewed","Reviewed on",{type:"date"}),
+      el("div",{class:"actions wide"},
+        el("button",{class:"btn primary",type:"submit",text:isNew?"Publish entry":"Save changes"}),
+        el("button",{class:"btn",type:"button",onclick:()=>{editing=null;renderEditor();},text:"Cancel"}),
+        !isNew ? el("button",{class:"btn danger",type:"button",onclick:()=>{
+          confirmBox.replaceChildren(el("span",{class:"status-msg err",text:`Delete ${e.id} for everyone?`}),
+            el("button",{class:"btn danger small",type:"button",onclick:async()=>{ try{ await db.doc("entries/"+e.id).delete(); open.delete(e.id); audit.delete(e.id); editing=null; renderEditor(); }catch(err){ msg.className="status-msg err"; msg.textContent="Couldn't delete: "+(err?.message||err?.code); } },text:"Delete"}),
+            el("button",{class:"btn small",type:"button",onclick:()=>confirmBox.replaceChildren(),text:"Keep"}));
+        },text:"Delete"}) : null,
+        confirmBox, msg));
+    form.addEventListener("submit", async ev => {
+      ev.preventDefault();
+      // Start from the stored entry so fields the form doesn't show (kits, hypothesis, test) survive an edit.
+      const fd = new FormData(form), body = {...e, id:e.id};
+      for (const f of FIELDS) body[f] = (fd.get(f) ?? e[f] ?? "").toString().trim();
+      body.added = e.added || new Date().toISOString().slice(0,10);
+      for (const k of ["visual","stat"]) { const t = (fd.get(k) || "").toString().trim(); if (!t) continue;
+        try { body[k] = JSON.parse(t); } catch { msg.className="status-msg err"; msg.textContent=`The ${k === "visual" ? "picture" : "stat"} field isn't valid JSON. Check brackets and quotes.`; return; } }
+      msg.className="status-msg"; msg.textContent="Saving…";
+      try { await db.doc("entries/"+e.id).set(body); open.add(e.id); editing=null; renderEditor(); }
+      catch(err){ msg.className="status-msg err"; msg.textContent = err?.code==="invalid_argument" ? "You don't have permission to edit this library." : "Couldn't save. Try again in a moment."; }
+    });
+    slot.replaceChildren(el("section",{class:"panel","aria-label":"Edit entry"}, el("h2",{text:(isNew?"New entry · ":"Editing · ")+e.id}), form));
+  }
+  $("#btn-add").addEventListener("click", () => openEditor(null));
+
+  /* ---------- wiring ---------- */
+
+  /* hero phones: three illustrated "Do" scenes that open their entries */
+  const HERO = [
+    {id:"BD-019", cap:"Filters people can combine", o:{s:"filters",chips:["M ×","L ×","Under £50 ×"],count:"24 results",options:[{label:"M",on:true},{label:"L",on:true},{label:"XL"}]}},
+    {id:"BD-262", cap:"An instant Back button", o:{s:"list",hl:3,tag:{text:"Instant · same spot",tone:"g"}}},
+    {id:"BD-259", cap:"One banner, form in view", o:{s:"form",banners:[{text:"Replies may take 10 days"}],title:"Apply for a permit",fields:2,fold:true}}
+  ];
+  $("#hero-art").replaceChildren(...HERO.map(h => el("a",{href:"#entry-"+h.id,"aria-label":`${h.cap} (${h.id})`},
+    el("span",{class:"badge-do","aria-hidden":"true",text:"✓ Do"}), phone(h.o), el("span",{class:"art-cap",text:h.cap}))));
+  function renderTicker(){
+    const latest = [...entries].sort((a,b)=>(b.added||"").localeCompare(a.added||"") || b.id.localeCompare(a.id)).slice(0,10);
+    if (!latest.length) return;
+    const items = latest.map(e => el("a",{href:"#entry-"+e.id}, el("b",{text:e.id}), document.createTextNode(e.title)));
+    const copy = latest.map(e => el("a",{href:"#entry-"+e.id,tabindex:"-1","aria-hidden":"true"}, el("b",{text:e.id}), document.createTextNode(e.title)));
+    $("#ticker-run").replaceChildren(...items, ...copy);
+  }
+  $("#gloss").replaceChildren(...GLOSSARY.filter(([k])=>k!=="AA"&&k!=="AAA").flatMap(([k,v])=>[el("dt",{text:k}), el("dd",{text:v})]));
+  $("#q").addEventListener("input", render);
+  $("#sort").addEventListener("change", ev => { try { localStorage.setItem("uxu-sort", ev.target.value); } catch {} render(); });
+  $("#only-verified").addEventListener("change", render);
+  $("#m-category").addEventListener("change", ev => setCategory(ev.target.value));
+  $("#m-class").addEventListener("change", ev => { filt.cls = ev.target.value; render(); });
+  $("#m-strength").addEventListener("change", ev => { filt.strength = ev.target.value; render(); });
+  route(); render();
+
+  async function boot(){
+    const c = window.claude;
+    if (!c?.use){ return unavailable(); }
+    let user;
+    [db, user, downloads] = await Promise.all([c.use("db"), c.use("user"), c.use("downloads")]);
+    if (!db) return unavailable();
+    if (downloads) $("#btn-export").hidden = false;
+    try { canWrite = !!(await user?.canEdit()); } catch {}
+    $("#btn-add").hidden = !canWrite;
+    // One live window per topic (each holds up to 1,000), plus one for any topic not in the list,
+    // so the library can grow well past 1,000 entries.
+    const col = db.collection("entries");
+    const windows = [...CATS.map(c => [c, col.where("category","==",c).limit(1000)]), ["__other", col.where("category","not-in",CATS).limit(1000)]];
+    const parts = new Map();
+    let queued = false;
+    const flush = () => { queued = false;
+      // Swap in the live store only once every topic window has answered, so the public copy never shrinks to a partial list.
+      if (parts.size !== windows.length) return;
+      const seen = new Map();
+      for (const list of parts.values()) for (const e of list) seen.set(e.id, e);
+      entries = [...seen.values()]; live = true;
+      loaded = true; render(); showPending();
+    };
+    for (const [key, q] of windows) q.onSnapshot(snap => {
+      parts.set(key, snap.docs.map(d => ({...d.data(), id:d.id})));
+      if (snap.docs.length >= 1000) console.warn("Topic window full:", key);
+      if (!queued) { queued = true; requestAnimationFrame(flush); }
+    }, () => { if (!live) return; $("#summary").replaceChildren(el("span",{class:"count",text:"Live updates paused. Reload the page to see the newest entries."})); });
+  }
+  // Everyone gets the published copy of the library straight away, signed in or not.
+  // If a live store is available, its entries replace the published copy.
+  let live = false, snapshotDone = false;
+  async function loadSnapshot(){
+    try {
+      const res = await fetch("/entries.json", {cache:"no-cache"});
+      if (!res.ok) throw new Error(res.status);
+      const list = await res.json();
+      if (!live && Array.isArray(list) && list.length){ entries = list; loaded = true; render(); showPending(); }
+    } catch (err) { console.warn("Public copy of the library didn't load", err); }
+    snapshotDone = true;
+    if (!loaded) unavailable();
+  }
+  function unavailable(){
+    if (live || entries.length) return;
+    if (!snapshotDone) return;
+    loaded = true; render();
+    $("#summary").replaceChildren();
+    const empty = $("#empty"); empty.hidden=false;
+    empty.replaceChildren(el("h3",{text:"The library didn't load"}), el("p",{text:"Check your connection and reload the page."}));
+  }
+  loadSnapshot();
+  boot();
+})();
+</script>
+
+
+</body></html>
