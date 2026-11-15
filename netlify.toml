@@ -1,9 +1,0 @@
-# Static site: no build step. Netlify publishes this folder as-is.
-[build]
-  publish = "."
-
-# The library data changes daily, so browsers should check for a newer copy.
-[[headers]]
-  for = "/entries.json"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"

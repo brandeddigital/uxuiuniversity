@@ -6,4 +6,4 @@ Public website for uxuiuniversity.com: free, plain-English summaries of UX resea
 - `entries.json` – every entry, refreshed daily by an automated task
 - `avatar.png` – icon and sharing image
 
-Hosted on Netlify. Pushing to `main` publishes the site.
+Hosted on GitHub Pages at uxuiuniversity.com. Pushing to `main` publishes the site.
